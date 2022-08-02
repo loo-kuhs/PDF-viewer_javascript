@@ -5,6 +5,9 @@ const currentPage = document.getElementById("current_page");
 const viewer = document.querySelector(".pdf-viewer");
 let currentPDF = {};
 
+/**
+ * * It resets the currentPDF object to its default values.
+ */
 function resetCurrentPDF() {
   currentPDF = {
     file: null,
@@ -22,6 +25,14 @@ document.getElementById("next").addEventListener("click", () => {
   const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
   if (isValidPage) {
     currentPDF.currentPage += 1;
+    renderCurrentPage();
+  }
+});
+
+zoomButton.addEventListener("input", () => {
+  if (currentPDF.file) {
+    document.getElementById("zoomValue").innerHTML = zoomButton.value + "%";
+    currentPDF.zoom = parseInt(zoomButton.value) / 100;
     renderCurrentPage();
   }
 });
@@ -48,6 +59,11 @@ input.addEventListener("change", (event) => {
   }
 });
 
+/**
+ * * It takes a PDF file as input, and then renders the first page of the PDF file 
+ * * in the viewer.
+ * @param data - The data of the PDF file.
+ */
 function loadPDF(data) {
   resetCurrentPDF();
   const pdfFile = pdfjsLib.getDocument(data);
@@ -60,10 +76,13 @@ function loadPDF(data) {
   });
 }
 
+/**
+ * * Render the current page of the current PDF file at the current zoom level.
+ */
 function renderCurrentPage() {
-  currentPDF.file.getPages(currentPDF.currentPage).then((page) => {
+  currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
     const context = viewer.getContext("2d");
-    const viewPort = page.getViewPort({ scale: currentPDF.zoom });
+    const viewPort = page.getViewport({ scale: currentPDF.zoom });
     viewer.height = viewPort.height;
     viewer.width = viewPort.width;
 
