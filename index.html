@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./css/styles.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.349/pdf.min.js"
+      integrity="sha512-xzh64kBm/sNMH3yE0yfg/V6gl1uzZ6oJCAC14KTY9ORUZzUVe2B/GJYlpmV2J2vrpbheZaeqHIw3XzOePOjx6Q=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <title>PDF Viewer</title>
+  </head>
+  <body>
+    <main>
+      <h3>Open you PDF file</h3>
+      <canvas class="pdf-viewer hidden"></canvas>
+    </main>
+
+    <footer>
+      <ul>
+        <li>
+          <button id="openPDF">
+            <span>Open</span> <i class="fas fa-folder-open"></i>
+          </button>
+          <input type="file" id="inputFile" hidden />
+        </li>
+
+        <li class="pagination">
+          <button id="previous">
+            <i class="fas fa-arrow-alt-circle-left"></i>
+          </button>
+          <span id="current_page">0 of 0</span>
+          <button id="next">
+            <i class="fas fa-arrow-alt-circle-right"></i>
+          </button>
+        </li>
+
+        <li>
+          <span id="zoomValue">150%</span>
+          <input
+            type="range"
+            id="zoom"
+            name="cowbell"
+            min="100"
+            max="300"
+            value="150"
+            step="50"
+            disabled
+          />
+        </li>
+      </ul>
+    </footer>
+    <script src="./js/scripts.js"></script>
+  </body>
+</html>
